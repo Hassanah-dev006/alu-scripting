@@ -15,7 +15,7 @@ def recurse(subreddit, after="", hot_list=None, page_counter=0):
 
     parameters = {'limit': 100, 'after': after}
     response = requests.get(subreddit_url, headers=headers,
-                            params=parameters, allow_redirects=False)
+                            params=parameters)
 
     if response.status_code == 200:
         json_data = response.json()
@@ -33,7 +33,7 @@ def recurse(subreddit, after="", hot_list=None, page_counter=0):
             return hot_list
 
     else:
-        return []
+        return None
 
 
 if __name__ == '__main__':
