@@ -7,12 +7,15 @@ import requests
 headers = {'User-Agent': 'MyAPI/0.0.1'}
 
 
-def recurse(subreddit, after="", hot_list=[], page_counter=0):
+def recurse(subreddit, after="", hot_list=None, page_counter=0):
+    if hot_list is None:
+        hot_list = []
 
     subreddit_url = "https://reddit.com/r/{}/hot.json".format(subreddit)
 
     parameters = {'limit': 100, 'after': after}
-    response = requests.get(subreddit_url, headers=headers, params=parameters)
+    response = requests.get(subreddit_url, headers=headers,
+                            params=parameters, allow_redirects=False)
 
     if response.status_code == 200:
         json_data = response.json()
@@ -23,9 +26,7 @@ def recurse(subreddit, after="", hot_list=[], page_counter=0):
 
         after = json_data.get('data').get('after')
         if after is not None:
-
             page_counter += 1
-            # print(len(hot_list))
             return recurse(subreddit, after=after,
                            hot_list=hot_list, page_counter=page_counter)
         else:
