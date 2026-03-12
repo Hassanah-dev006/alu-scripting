@@ -30,10 +30,10 @@ def recurse(subreddit, after="", hot_list=None, page_counter=0):
             return recurse(subreddit, after=after,
                            hot_list=hot_list, page_counter=page_counter)
         else:
-            return hot_list
+            return "OK"
 
     else:
-        return None
+        return "OK"
 
 
 if __name__ == '__main__':
