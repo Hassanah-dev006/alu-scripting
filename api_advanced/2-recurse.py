@@ -11,7 +11,7 @@ def recurse(subreddit, after="", hot_list=None, page_counter=0):
     if hot_list is None:
         hot_list = []
 
-    subreddit_url = "https://reddit.com/r/{}/hot.json".format(subreddit)
+    subreddit_url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
 
     parameters = {'limit': 100, 'after': after}
     response = requests.get(subreddit_url, headers=headers,
@@ -33,8 +33,8 @@ def recurse(subreddit, after="", hot_list=None, page_counter=0):
             return hot_list
 
     else:
-        return None
+        return []
 
 
 if __name__ == '__main__':
-    print(recurse("recursor"))
+    print(recurse("programming"))
