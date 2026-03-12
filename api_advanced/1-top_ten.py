@@ -11,9 +11,9 @@ def top_ten(subreddit):
     params = {'limit': 10}
 
     response = requests.get(url, headers=headers, params=params,
-                            allow_redirects=True)
+                            allow_redirects=False)
 
-    if response.status_code == 200 and 'search' not in response.url:
+    if response.status_code == 200:
         posts = response.json().get('data').get('children')
         for post in posts:
             print(post.get('data').get('title'))
